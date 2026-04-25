@@ -99,6 +99,22 @@
   .ex-input:focus { border-color:var(--brown); background:white; }
   .ex-input::placeholder { color:var(--brown-mid); font-size:0.72rem; }
   .ex-input:disabled { opacity:0.25; }
+  .prev-kg { display:block; font-size:0.65rem; font-style:italic; color:var(--brown); margin-bottom:3px; text-align:center; min-height:14px; }
+  .water-card { background:linear-gradient(135deg,var(--brown-dark),var(--brown)); border-radius:20px; padding:18px; margin-bottom:8px; position:relative; overflow:hidden; }
+  .water-card::before { content:''; position:absolute; right:-20px; top:-20px; width:110px; height:110px; background:rgba(255,255,255,0.06); border-radius:50%; }
+  .water-card::after { content:''; position:absolute; right:20px; bottom:-30px; width:70px; height:70px; background:rgba(255,255,255,0.04); border-radius:50%; }
+  .water-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .water-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--brown-mid); margin-bottom:10px; }
+  .water-inputs { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .water-field { display:flex; flex-direction:column; gap:4px; }
+  .water-field-label { font-size:0.62rem; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:1px; }
+  .water-input { border:none; outline:none; background:rgba(255,255,255,0.12); border-radius:10px; padding:8px 10px; font-family:'Playfair Display',serif; font-size:1.4rem; color:white; width:100%; text-align:center; }
+  .water-input::placeholder { color:rgba(255,255,255,0.3); font-size:1.2rem; }
+  .water-unit { font-size:0.7rem; color:rgba(255,255,255,0.6); text-align:center; margin-top:2px; }
+  .water-bar-wrap { margin-top:14px; }
+  .water-bar-bg { background:rgba(255,255,255,0.15); border-radius:20px; height:6px; overflow:hidden; }
+  .water-bar-fill { height:100%; background:var(--brown-mid); border-radius:20px; transition:width 0.5s ease; }
+  .water-bar-label { font-size:0.65rem; color:rgba(255,255,255,0.6); margin-top:5px; text-align:right; }
   .ex-select { border:1.5px solid var(--surface); border-radius:10px; padding:7px 6px; font-size:0.75rem; outline:none; font-family:'DM Sans',sans-serif; color:var(--forest); background:var(--bg); width:100%; transition:border-color 0.2s; cursor:pointer; }
   .ex-select:focus { border-color:var(--brown); background:white; }
   .cardio-row { background:var(--brown-light); border-radius:12px; padding:11px 14px; margin-top:12px; display:flex; align-items:center; justify-content:space-between; }
@@ -213,6 +229,26 @@
     <div class="prog-bar-label" id="htProgressLabel">0% vers l'objectif</div>
   </div>
 
+  <div class="section-title">Hydratation</div>
+  <div class="macros-card">
+    <div class="macros-label">💧 Eau bue · objectif 2 L / 8 verres par jour</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:10px;">
+      <div class="macro-item"><div class="macro-lbl">Lun</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d1" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+      <div class="macro-item"><div class="macro-lbl">Mar</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d2" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+      <div class="macro-item"><div class="macro-lbl">Mer</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d3" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+      <div class="macro-item"><div class="macro-lbl">Jeu</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d4" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+      <div class="macro-item"><div class="macro-lbl">Ven</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d5" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+      <div class="macro-item"><div class="macro-lbl">Sam</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d6" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+      <div class="macro-item"><div class="macro-lbl">Dim</div><input style="border:none;outline:none;background:transparent;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dark);width:100%;text-align:center;" id="water-d7" type="number" step="0.1" min="0" max="6" placeholder="—" oninput="updateWaterBar()"><div class="macro-lbl" style="margin-top:2px;">L</div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <div style="font-size:0.72rem;color:var(--light);">Moyenne · <span id="waterMoyenne" style="color:var(--brown-dark);font-weight:500;">—</span> L/jour</div>
+      <div style="font-size:0.72rem;color:var(--light);">≈ <span id="waterVerresMoy" style="color:var(--brown-dark);font-weight:500;">—</span> verres/jour</div>
+    </div>
+    <div class="prog-bar-bg"><div class="prog-bar-fill" id="waterBar" style="width:0%"></div></div>
+    <div class="prog-bar-label" id="waterBarLabel">objectif 2 L / jour</div>
+  </div>
+
   <button class="save-btn" onclick="saveData()">✓ Sauvegarder la semaine</button>
 </div>
 
@@ -232,10 +268,10 @@
     </div>
     <div class="day-body">
       <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j1-ht-k"><input class="ex-input" placeholder="reps" data-ex="j1-ht-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j1-ab-k"><input class="ex-input" placeholder="reps" data-ex="j1-ab-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Presse cuisses (pieds hauts)</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j1-pj-k"><input class="ex-input" placeholder="reps" data-ex="j1-pj-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Fentes bulgares</div><span class="exercise-tag normal">3x10</span></div><input class="ex-input" placeholder="kg" data-ex="j1-fb-k"><input class="ex-input" placeholder="reps" data-ex="j1-fb-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-ht-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-ht-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-ht-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-ab-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Presse cuisses (pieds hauts)</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-pj-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-pj-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-pj-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Fentes bulgares</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j1-fb-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-fb-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-fb-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Gainage planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j1-pl-r"></div>
       <div class="cardio-row"><div><div class="cardio-label">🪜 Escalier · 15 min</div><div class="cardio-sub">Rythme soutenu</div></div><div class="cardio-check" id="cardio-j1" onclick="toggleCardio('j1')"></div></div>
       <textarea class="note-area" placeholder="Notes..." data-note="j1"></textarea>
@@ -250,10 +286,10 @@
     </div>
     <div class="day-body">
       <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Face pull poulie</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j2-fp-k"><input class="ex-input" placeholder="reps" data-ex="j2-fp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Rowing prise neutre</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j2-rw-k"><input class="ex-input" placeholder="reps" data-ex="j2-rw-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Lat pulldown pronation</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j2-lp-k"><input class="ex-input" placeholder="reps" data-ex="j2-lp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><input class="ex-input" placeholder="kg" data-ex="j2-hy-k"><input class="ex-input" placeholder="reps" data-ex="j2-hy-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Face pull poulie</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-fp-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-fp-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-fp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Rowing prise neutre</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-rw-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-rw-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-rw-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Lat pulldown pronation</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-lp-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-lp-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-lp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j2-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-hy-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Vacuum abdominal</div><span class="exercise-tag normal">3x20s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-va-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Side plank</div><span class="exercise-tag normal">3x30s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-sp-r"></div>
       <div class="cardio-row"><div><div class="cardio-label">🚴 Vélo stationnaire · 15 min</div><div class="cardio-sub">Résistance moyenne</div></div><div class="cardio-check" id="cardio-j2" onclick="toggleCardio('j2')"></div></div>
@@ -269,10 +305,10 @@
     </div>
     <div class="day-body">
       <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j4-ht-k"><input class="ex-input" placeholder="reps" data-ex="j4-ht-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">RDL</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j4-rdl-k"><input class="ex-input" placeholder="reps" data-ex="j4-rdl-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j4-ab-k"><input class="ex-input" placeholder="reps" data-ex="j4-ab-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Step-up haut</div><span class="exercise-tag normal">3x10</span></div><input class="ex-input" placeholder="kg" data-ex="j4-su-k"><input class="ex-input" placeholder="reps" data-ex="j4-su-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ht-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ht-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ht-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">RDL</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-rdl-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-rdl-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-rdl-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ab-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Step-up haut</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j4-su-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-su-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-su-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Dead bug</div><span class="exercise-tag normal">3x10</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j4-db-r"></div>
       <div class="cardio-row"><div><div class="cardio-label">🏃 Tapis incliné · 15 min</div><div class="cardio-sub">Marche rapide</div></div><div class="cardio-check" id="cardio-j4" onclick="toggleCardio('j4')"></div></div>
       <textarea class="note-area" placeholder="Notes..." data-note="j4"></textarea>
@@ -287,11 +323,11 @@
     </div>
     <div class="day-body">
       <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Face pull</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j5-fp-k"><input class="ex-input" placeholder="reps" data-ex="j5-fp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Rowing Pendlay</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" placeholder="kg" data-ex="j5-rp-k"><input class="ex-input" placeholder="reps" data-ex="j5-rp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Face pull</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j5-fp-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-fp-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-fp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Rowing Pendlay</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j5-rp-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-rp-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-rp-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Crunch bicycle</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j5-bc-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Élévations latérales</div><span class="exercise-tag normal">3x15</span></div><input class="ex-input" placeholder="kg" data-ex="j5-el-k"><input class="ex-input" placeholder="reps" data-ex="j5-el-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><input class="ex-input" placeholder="kg" data-ex="j5-hy-k"><input class="ex-input" placeholder="reps" data-ex="j5-hy-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Élévations latérales</div><span class="exercise-tag normal">3x15</span></div><div><span class="prev-kg" id="prev-j5-el-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-el-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-el-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j5-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-hy-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j5-pl-r"></div>
       <div class="cardio-row"><div><div class="cardio-label">🌀 Elliptique · 15 min</div><div class="cardio-sub">Rythme modéré</div></div><div class="cardio-check" id="cardio-j5" onclick="toggleCardio('j5')"></div></div>
       <textarea class="note-area" placeholder="Notes..." data-note="j5"></textarea>
@@ -476,6 +512,16 @@
     <div class="chart-subtitle">Évolution de la charge · en kg · objectif 30 kg</div>
     <div class="chart-wrap"><canvas id="htChart"></canvas></div>
   </div>
+
+  <div class="section-title">Hydratation</div>
+  <div class="chart-card">
+    <div class="chart-title">Eau bue par semaine</div>
+    <div class="chart-subtitle">Moyenne journalière · en litres · objectif 2 L/jour</div>
+    <div class="chart-wrap">
+      <canvas id="waterChart" style="display:none"></canvas>
+      <div class="empty-chart" id="water-empty"><span>💧</span>Saisis ta consommation d'eau<br>pour voir la courbe apparaître</div>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast">✓ Semaine sauvegardée !</div>
@@ -486,6 +532,23 @@
   const C={brown:'#8B5E3C',dark:'#5C3D20',mid:'#D4B896',green:'#7A9E7E',red:'#C45A5A',light:'#B89070'};
 
   function getWK(){return `moi_week_${currentWeek}`;}
+
+  function updateWaterBar(){
+    const vals=[1,2,3,4,5,6,7].map(d=>{const v=parseFloat(document.getElementById('water-d'+d).value);return isNaN(v)?null:v;}).filter(v=>v!==null);
+    if(vals.length===0){
+      document.getElementById('waterMoyenne').textContent='—';
+      document.getElementById('waterVerresMoy').textContent='—';
+      document.getElementById('waterBar').style.width='0%';
+      document.getElementById('waterBarLabel').textContent='objectif 2 L / jour';
+      return;
+    }
+    const moy=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(2);
+    const pct=Math.min(100,Math.round((moy/2)*100));
+    document.getElementById('waterMoyenne').textContent=moy;
+    document.getElementById('waterVerresMoy').textContent=Math.round(moy/0.25);
+    document.getElementById('waterBar').style.width=pct+'%';
+    document.getElementById('waterBarLabel').textContent=pct+'% de l\'objectif · sur '+vals.length+' jour'+(vals.length>1?'s':'');
+  }
 
   function switchTab(tab,btn){
     document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
@@ -527,6 +590,7 @@
   function saveData(silent=false){
     const data={};
     data.poids=document.getElementById('poidsInput').value;
+    [1,2,3,4,5,6,7].forEach(d=>{data['water-d'+d]=document.getElementById('water-d'+d).value;});
     ['taille','hanches','cuisses','ventre','bras','fesses'].forEach(m=>{data['m-'+m]=document.getElementById('m-'+m).value;});
     document.querySelectorAll('[data-ex]').forEach(el=>{data[el.dataset.ex]=el.value;});
     document.querySelectorAll('[data-note]').forEach(el=>{data['note-'+el.dataset.note]=el.value;});
@@ -558,11 +622,24 @@
     try{Object.assign(allData,JSON.parse(localStorage.getItem('fitnessTrackerMoi')||'{}'));}catch(e){}
     const data=allData[getWK()]||{};
     document.getElementById('poidsInput').value=data.poids||'';
+    [1,2,3,4,5,6,7].forEach(d=>{document.getElementById('water-d'+d).value=data['water-d'+d]||'';});
+    updateWaterBar();
     ['taille','hanches','cuisses','ventre','bras','fesses'].forEach(m=>{
       const el=document.getElementById('m-'+m);
       if(el) el.value=data['m-'+m]||'';
     });
     document.querySelectorAll('[data-ex]').forEach(el=>{el.value=data[el.dataset.ex]||'';});
+    // Afficher le kg de la semaine précédente
+    if(currentWeek>1){
+      const prevData=allData[`moi_week_${currentWeek-1}`]||{};
+      document.querySelectorAll('[id^="prev-"]').forEach(span=>{
+        const key=span.id.replace('prev-','');
+        const val=prevData[key];
+        span.textContent=val?`S${currentWeek-1} : ${val} kg →`:'';
+      });
+    }else{
+      document.querySelectorAll('[id^="prev-"]').forEach(span=>{span.textContent='';});
+    }
     document.querySelectorAll('[data-note]').forEach(el=>{el.value=data['note-'+el.dataset.note]||'';});
     ['j1','j2','j4','j5'].forEach(j=>{
       const c=document.getElementById('cardio-'+j);
@@ -665,6 +742,24 @@
 
     renderMensChart(L);
     updateStats();
+
+    // Graphique eau
+    const waterData=Array.from({length:MAX_WEEKS},(_,i)=>{
+      const d=allData[`moi_week_${i+1}`]||{};
+      const vals=[1,2,3,4,5,6,7].map(j=>{const v=parseFloat(d['water-d'+j]);return isNaN(v)?null:v;}).filter(v=>v!==null);
+      if(vals.length===0) return null;
+      return parseFloat((vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(2));
+    });
+    const hasWater=waterData.some(v=>v!==null);
+    document.getElementById('waterChart').style.display=hasWater?'block':'none';
+    document.getElementById('water-empty').style.display=hasWater?'none':'flex';
+    if(hasWater){
+      if(charts.water) charts.water.destroy();
+      charts.water=new Chart(document.getElementById('waterChart'),{type:'line',data:{labels:L,datasets:[
+        {data:waterData,borderColor:C.brown,backgroundColor:'rgba(139,94,60,0.08)',borderWidth:2.5,pointBackgroundColor:C.dark,pointRadius:4,tension:0.4,spanGaps:true,fill:true},
+        {data:Array(MAX_WEEKS).fill(2),borderColor:C.mid,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false}
+      ]},options:{...baseOpts(ctx=>ctx.parsed.y+' L'),scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:C.light}},y:{min:0,max:3,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:C.light}}}}});
+    }
   }
 
   function renderMensChart(L){
