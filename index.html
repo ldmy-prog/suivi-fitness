@@ -100,6 +100,36 @@
   .ex-input::placeholder { color:var(--brown-mid); font-size:0.72rem; }
   .ex-input:disabled { opacity:0.25; }
   .prev-kg { display:block; font-size:0.65rem; font-style:italic; color:var(--brown); margin-bottom:3px; text-align:center; min-height:14px; }
+  /* Exercise picker */
+  .ex-picker-wrap { position:relative; width:100%; }
+  .ex-picker-btn { width:100%; border:1.5px solid var(--surface); border-radius:10px; padding:7px 8px; font-size:0.78rem; text-align:left; outline:none; font-family:'Outfit',sans-serif; color:var(--forest); background:var(--bg); cursor:pointer; transition:border-color 0.2s; display:flex; align-items:center; justify-content:space-between; gap:4px; }
+  .ex-picker-btn:hover { border-color:var(--brown-mid); }
+  .ex-picker-btn .ex-name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ex-picker-btn .ex-arrow { font-size:0.6rem; color:var(--light); flex-shrink:0; }
+  .ex-picker-dropdown { position:fixed; background:var(--white); border:1.5px solid var(--brown-mid); border-radius:14px; box-shadow:0 8px 32px rgba(92,61,32,0.18); z-index:8000; overflow:hidden; display:none; }
+  .ex-picker-dropdown.open { display:block; }
+  .ex-picker-search { padding:10px 12px 6px; border-bottom:1px solid var(--surface); }
+  .ex-picker-search input { width:100%; border:1.5px solid var(--brown-mid); border-radius:8px; padding:7px 10px; font-size:0.8rem; font-family:'Outfit',sans-serif; color:var(--forest); background:var(--bg); outline:none; }
+  .ex-picker-search input:focus { border-color:var(--brown); }
+  .ex-picker-list { max-height:220px; overflow-y:auto; padding:4px 0; }
+  .ex-picker-item { padding:9px 14px; font-size:0.8rem; color:var(--forest); cursor:pointer; transition:background 0.15s; }
+  .ex-picker-item:hover { background:var(--brown-light); color:var(--brown-dark); }
+  .ex-picker-item.selected { background:var(--brown-light); color:var(--brown-dark); font-weight:500; }
+  .ex-picker-custom { padding:8px 12px; border-top:1px solid var(--surface); }
+  .ex-picker-custom input { width:100%; border:1.5px solid var(--surface); border-radius:8px; padding:7px 10px; font-size:0.78rem; font-family:'Outfit',sans-serif; color:var(--forest); background:var(--bg); outline:none; }
+  .ex-picker-custom input:focus { border-color:var(--brown); }
+  .ex-picker-custom input::placeholder { color:var(--brown-mid); }
+  /* Add exercise button */
+  .add-exercise-btn { width:100%; margin-top:8px; padding:8px; border:1.5px dashed var(--brown-mid); border-radius:10px; background:none; font-family:'Outfit',sans-serif; font-size:0.75rem; color:var(--brown); cursor:pointer; transition:all 0.2s; text-align:center; }
+  .add-exercise-btn:hover { background:var(--brown-light); border-color:var(--brown); }
+  .remove-exercise-btn { width:24px; height:24px; border-radius:50%; background:var(--surface); border:none; cursor:pointer; font-size:0.65rem; color:var(--light); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.2s; }
+  .remove-exercise-btn:hover { background:var(--red-soft); color:#A05050; }
+  .steps-row { display:none; align-items:center; gap:8px; margin-top:6px; background:var(--brown-light); border-radius:10px; padding:8px 12px; }
+  .steps-row.visible { display:flex; }
+  .steps-label { font-size:0.75rem; color:var(--brown-dark); font-weight:500; white-space:nowrap; }
+  .steps-input { border:1.5px solid var(--brown-mid); border-radius:8px; padding:6px 8px; font-size:0.83rem; text-align:center; outline:none; font-family:'Outfit',sans-serif; color:var(--forest); background:white; width:110px; transition:border-color 0.2s; }
+  .steps-input:focus { border-color:var(--brown); }
+  .steps-input::placeholder { color:var(--brown-mid); }
   .water-card { background:linear-gradient(135deg,var(--brown-dark),var(--brown)); border-radius:20px; padding:18px; margin-bottom:8px; position:relative; overflow:hidden; }
   .water-card::before { content:''; position:absolute; right:-20px; top:-20px; width:110px; height:110px; background:rgba(255,255,255,0.06); border-radius:50%; }
   .water-card::after { content:''; position:absolute; right:20px; bottom:-30px; width:70px; height:70px; background:rgba(255,255,255,0.04); border-radius:50%; }
@@ -151,8 +181,56 @@
   .save-btn { background:var(--brown-dark); color:white; border:none; border-radius:14px; padding:14px 24px; font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:500; cursor:pointer; width:100%; margin-top:20px; letter-spacing:0.5px; transition:all 0.2s; }
   .save-btn:hover { background:var(--forest); }
   .save-btn:active { transform:scale(0.98); }
-  .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--forest); color:white; padding:12px 24px; border-radius:30px; font-size:0.83rem; transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index:999; white-space:nowrap; }
-  .toast.show { transform:translateX(-50%) translateY(0); }
+  .reward-category { margin-bottom:24px; }
+  .reward-category-title { font-size:0.72rem; text-transform:uppercase; letter-spacing:2px; color:var(--light); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .reward-category-title::after { content:''; flex:1; height:1px; background:var(--brown-mid); }
+  .reward-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .reward-card { display:flex; flex-direction:column; align-items:center; text-align:center; cursor:default; }
+  .reward-medal { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.8rem; position:relative; margin:0 auto 8px; transition:all 0.4s; }
+  .reward-card.locked .reward-medal { background:var(--surface); border:3px solid var(--brown-mid); filter:grayscale(1); opacity:0.4; }
+  .reward-card.unlocked .reward-medal { background:radial-gradient(circle at 35% 35%, var(--brown-light), var(--brown-mid)); border:3px solid var(--brown); box-shadow:0 0 0 4px rgba(139,94,60,0.15), 0 4px 16px rgba(139,94,60,0.3); animation:medalPop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+  .reward-card.unlocked .reward-medal::after { content:''; position:absolute; top:6px; left:10px; width:18px; height:10px; background:rgba(255,255,255,0.35); border-radius:50%; transform:rotate(-30deg); }
+  @keyframes medalPop { 0%{transform:scale(0.7);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .reward-name { font-family:'Playfair Display',serif; font-size:0.72rem; color:var(--forest); font-weight:700; line-height:1.2; margin-bottom:2px; }
+  .reward-card.locked .reward-name { color:var(--light); }
+  .reward-desc { font-size:0.58rem; color:var(--light); line-height:1.3; }
+  .reward-card.unlocked .reward-desc { color:var(--brown); }
+  .rewards-summary { background:var(--brown-dark); border-radius:20px; padding:18px; display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; position:relative; overflow:hidden; }
+  .rewards-summary::before { content:''; position:absolute; right:-20px; top:-20px; width:100px; height:100px; background:rgba(255,255,255,0.06); border-radius:50%; }
+  .rewards-ring { position:relative; width:64px; height:64px; flex-shrink:0; }
+  .rewards-ring svg { transform:rotate(-90deg); }
+  .rewards-ring-bg { fill:none; stroke:rgba(255,255,255,0.15); stroke-width:6; }
+  .rewards-ring-fill { fill:none; stroke:var(--brown-mid); stroke-width:6; stroke-linecap:round; transition:stroke-dashoffset 0.8s ease; }
+  .rewards-ring-text { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .rewards-count { font-family:'Playfair Display',serif; font-size:1.3rem; color:white; line-height:1; }
+  .rewards-label { font-size:0.55rem; text-transform:uppercase; letter-spacing:1px; color:var(--brown-mid); margin-top:2px; }
+  .rewards-info { flex:1; padding-left:16px; }
+  .rewards-info-title { font-family:'Playfair Display',serif; font-size:1rem; color:white; margin-bottom:4px; }
+  .rewards-info-sub { font-size:0.72rem; color:var(--brown-mid); }
+  /* ===== REWARD CELEBRATION OVERLAY ===== */
+  .reward-overlay { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0; transition:opacity 0.3s ease; }
+  .reward-overlay.show { opacity:1; pointer-events:all; }
+  .reward-overlay-bg { position:absolute; inset:0; background:rgba(28,16,8,0.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  .reward-celebration { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; padding:40px 32px; animation:celebIn 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  @keyframes celebIn { 0%{transform:scale(0.5) translateY(40px);opacity:0} 100%{transform:scale(1) translateY(0);opacity:1} }
+  .reward-overlay-medal { width:120px; height:120px; border-radius:50%; background:radial-gradient(circle at 35% 30%, var(--brown-light), var(--brown-mid)); border:4px solid var(--brown); box-shadow:0 0 0 8px rgba(139,94,60,0.2), 0 0 60px rgba(212,184,150,0.5); display:flex; align-items:center; justify-content:center; font-size:3.5rem; position:relative; margin-bottom:28px; animation:medalSpin 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s both; }
+  @keyframes medalSpin { 0%{transform:scale(0) rotate(-180deg)} 100%{transform:scale(1) rotate(0deg)} }
+  .reward-overlay-medal::after { content:''; position:absolute; top:14px; left:18px; width:30px; height:16px; background:rgba(255,255,255,0.4); border-radius:50%; transform:rotate(-35deg); }
+  .reward-overlay-badge { background:var(--brown); color:white; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:14px; animation:fadeUp 0.5s ease 0.4s both; }
+  @keyframes fadeUp { 0%{transform:translateY(20px);opacity:0} 100%{transform:translateY(0);opacity:1} }
+  .reward-overlay-title { font-family:'Playfair Display',serif; font-size:2rem; color:white; font-weight:700; margin-bottom:8px; animation:fadeUp 0.5s ease 0.5s both; line-height:1.2; }
+  .reward-overlay-desc { font-size:0.85rem; color:var(--brown-mid); animation:fadeUp 0.5s ease 0.6s both; margin-bottom:36px; }
+  .reward-overlay-btn { background:var(--brown-mid); color:var(--forest); border:none; border-radius:30px; padding:14px 36px; font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; cursor:pointer; animation:fadeUp 0.5s ease 0.7s both; letter-spacing:0.5px; transition:all 0.2s; }
+  .reward-overlay-btn:hover { background:white; }
+  /* Particles */
+  .particle { position:absolute; width:8px; height:8px; border-radius:50%; pointer-events:none; animation:particleFly 1.2s ease-out forwards; }
+  @keyframes particleFly { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0} }
+  .particle.square { border-radius:2px; width:6px; height:10px; }
+  /* Rings */
+  .reward-rings { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+  .reward-ring-anim { position:absolute; border-radius:50%; border:2px solid rgba(212,184,150,0.3); animation:ringExpand 2.2s ease-out forwards; }
+  @keyframes ringExpand { 0%{width:140px;height:140px;opacity:0.8} 100%{width:500px;height:500px;opacity:0} }
+  .reward-unlock-toast.show { transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -170,7 +248,8 @@
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="switchTab('suivi',this)">📋 Suivi</button>
   <button class="nav-tab" onclick="switchTab('seances',this)">💪 Séances</button>
-  <button class="nav-tab" onclick="switchTab('graphiques',this)">📊 Graphiques</button>
+  <button class="nav-tab" onclick="switchTab('graphiques',this)">📊 Stats</button>
+  <button class="nav-tab" onclick="switchTab('rewards',this)">🏆 Rewards</button>
 </div>
 
 <!-- ===== SUIVI ===== -->
@@ -273,7 +352,14 @@
       <div class="exercise-row"><div><div class="exercise-name">Presse cuisses (pieds hauts)</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-pj-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-pj-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-pj-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Fentes bulgares</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j1-fb-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-fb-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-fb-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Gainage planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j1-pl-r"></div>
+      <div id="extra-list-j1"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j1')">+ Ajouter un exercice</button>
       <div class="cardio-row"><div><div class="cardio-label">🪜 Escalier · 15 min</div><div class="cardio-sub">Rythme soutenu</div></div><div class="cardio-check" id="cardio-j1" onclick="toggleCardio('j1')"></div></div>
+      <div class="steps-row visible" id="steps-j1" style="display:flex;">
+        <span class="steps-label">👣 Nombre de pas</span>
+        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j1-pas" oninput="updateStepsBar('j1',this.value)">
+        <span class="steps-badge" id="steps-badge-j1" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
+      </div>
       <textarea class="note-area" placeholder="Notes..." data-note="j1"></textarea>
     </div>
   </div>
@@ -292,7 +378,14 @@
       <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j2-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-hy-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Vacuum abdominal</div><span class="exercise-tag normal">3x20s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-va-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Side plank</div><span class="exercise-tag normal">3x30s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-sp-r"></div>
+      <div id="extra-list-j2"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j2')">+ Ajouter un exercice</button>
       <div class="cardio-row"><div><div class="cardio-label">🚴 Vélo stationnaire · 15 min</div><div class="cardio-sub">Résistance moyenne</div></div><div class="cardio-check" id="cardio-j2" onclick="toggleCardio('j2')"></div></div>
+      <div class="steps-row visible" id="steps-j2" style="display:flex;">
+        <span class="steps-label">👣 Nombre de pas</span>
+        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j2-pas" oninput="updateStepsBar('j2',this.value)">
+        <span class="steps-badge" id="steps-badge-j2" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
+      </div>
       <textarea class="note-area" placeholder="Notes..." data-note="j2"></textarea>
     </div>
   </div>
@@ -310,7 +403,14 @@
       <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ab-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Step-up haut</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j4-su-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-su-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-su-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Dead bug</div><span class="exercise-tag normal">3x10</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j4-db-r"></div>
+      <div id="extra-list-j4"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j4')">+ Ajouter un exercice</button>
       <div class="cardio-row"><div><div class="cardio-label">🏃 Tapis incliné · 15 min</div><div class="cardio-sub">Marche rapide</div></div><div class="cardio-check" id="cardio-j4" onclick="toggleCardio('j4')"></div></div>
+      <div class="steps-row visible" id="steps-j4" style="display:flex;">
+        <span class="steps-label">👣 Nombre de pas</span>
+        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j4-pas" oninput="updateStepsBar('j4',this.value)">
+        <span class="steps-badge" id="steps-badge-j4" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
+      </div>
       <textarea class="note-area" placeholder="Notes..." data-note="j4"></textarea>
     </div>
   </div>
@@ -329,7 +429,14 @@
       <div class="exercise-row"><div><div class="exercise-name">Élévations latérales</div><span class="exercise-tag normal">3x15</span></div><div><span class="prev-kg" id="prev-j5-el-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-el-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-el-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j5-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-hy-r"></div>
       <div class="exercise-row"><div><div class="exercise-name">Planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j5-pl-r"></div>
+      <div id="extra-list-j5"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j5')">+ Ajouter un exercice</button>
       <div class="cardio-row"><div><div class="cardio-label">🌀 Elliptique · 15 min</div><div class="cardio-sub">Rythme modéré</div></div><div class="cardio-check" id="cardio-j5" onclick="toggleCardio('j5')"></div></div>
+      <div class="steps-row visible" id="steps-j5" style="display:flex;">
+        <span class="steps-label">👣 Nombre de pas</span>
+        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j5-pas" oninput="updateStepsBar('j5',this.value)">
+        <span class="steps-badge" id="steps-badge-j5" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
+      </div>
       <textarea class="note-area" placeholder="Notes..." data-note="j5"></textarea>
     </div>
   </div>
@@ -353,7 +460,7 @@
       <div class="off-mode active" id="off-j3-cardio">
         <div class="col-headers"><div class="col-header">Type</div><div class="col-header">Durée</div><div class="col-header">Fait</div></div>
         <div class="exercise-row">
-          <select class="ex-select" data-ex="off-j3-type"><option value="">— Choisir —</option><option>🏃 Course extérieur</option><option>🚶 Marche extérieur</option><option>🏃 Course tapis</option><option>🏃 Marche inclinée</option><option>🚴 Vélo extérieur</option><option>🌀 Elliptique</option><option>🪜 Escalier</option><option>💫 Autre</option></select>
+          <select class="ex-select" data-ex="off-j3-type" onchange="toggleSteps('j3',this.value)"><option value="">— Choisir —</option><option>🏃 Course extérieur</option><option>🚶 Marche extérieur</option><option>🏃 Course tapis</option><option>🏃 Marche inclinée</option><option>🚴 Vélo extérieur</option><option>🌀 Elliptique</option><option>🪜 Escalier</option><option>💫 Autre</option></select>
           <input class="ex-input" placeholder="min" data-ex="off-j3-duree">
           <div class="cardio-check" id="off-check-j3" onclick="toggleOffCheck('j3')" style="margin:auto;"></div>
         </div>
@@ -361,6 +468,11 @@
         <div class="exercise-row">
           <input class="ex-input" placeholder="km" data-ex="off-j3-dist">
           <select class="ex-select" data-ex="off-j3-effort" style="grid-column:span 2;"><option value="">— Choisir —</option><option>😌 Facile</option><option>🙂 Modéré</option><option>😤 Difficile</option><option>🔥 Maximum</option></select>
+        </div>
+        <div class="steps-row" id="steps-j3">
+          <span class="steps-label">👣 Nombre de pas</span>
+          <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j3-pas" oninput="updateStepsBar('j3',this.value)">
+          <span class="steps-badge" id="steps-badge-j3" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
         </div>
       </div>
       <!-- MODE ABDO -->
@@ -391,7 +503,7 @@
       <div class="off-mode active" id="off-j6-cardio">
         <div class="col-headers"><div class="col-header">Type</div><div class="col-header">Durée</div><div class="col-header">Fait</div></div>
         <div class="exercise-row">
-          <select class="ex-select" data-ex="off-j6-type"><option value="">— Choisir —</option><option>🏃 Course extérieur</option><option>🚶 Marche extérieur</option><option>🏃 Course tapis</option><option>🏃 Marche inclinée</option><option>🚴 Vélo extérieur</option><option>🌀 Elliptique</option><option>🪜 Escalier</option><option>💫 Autre</option></select>
+          <select class="ex-select" data-ex="off-j6-type" onchange="toggleSteps('j6',this.value)"><option value="">— Choisir —</option><option>🏃 Course extérieur</option><option>🚶 Marche extérieur</option><option>🏃 Course tapis</option><option>🏃 Marche inclinée</option><option>🚴 Vélo extérieur</option><option>🌀 Elliptique</option><option>🪜 Escalier</option><option>💫 Autre</option></select>
           <input class="ex-input" placeholder="min" data-ex="off-j6-duree">
           <div class="cardio-check" id="off-check-j6" onclick="toggleOffCheck('j6')" style="margin:auto;"></div>
         </div>
@@ -399,6 +511,11 @@
         <div class="exercise-row">
           <input class="ex-input" placeholder="km" data-ex="off-j6-dist">
           <select class="ex-select" data-ex="off-j6-effort" style="grid-column:span 2;"><option value="">— Choisir —</option><option>😌 Facile</option><option>🙂 Modéré</option><option>😤 Difficile</option><option>🔥 Maximum</option></select>
+        </div>
+        <div class="steps-row" id="steps-j6">
+          <span class="steps-label">👣 Nombre de pas</span>
+          <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j6-pas" oninput="updateStepsBar('j6',this.value)">
+          <span class="steps-badge" id="steps-badge-j6" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
         </div>
       </div>
       <div class="off-mode" id="off-j6-abdo">
@@ -428,7 +545,7 @@
       <div class="off-mode active" id="off-j7-cardio">
         <div class="col-headers"><div class="col-header">Type</div><div class="col-header">Durée</div><div class="col-header">Fait</div></div>
         <div class="exercise-row">
-          <select class="ex-select" data-ex="off-j7-type"><option value="">— Choisir —</option><option>🏃 Course extérieur</option><option>🚶 Marche extérieur</option><option>🏃 Course tapis</option><option>🏃 Marche inclinée</option><option>🚴 Vélo extérieur</option><option>🌀 Elliptique</option><option>🪜 Escalier</option><option>💫 Autre</option></select>
+          <select class="ex-select" data-ex="off-j7-type" onchange="toggleSteps('j7',this.value)"><option value="">— Choisir —</option><option>🏃 Course extérieur</option><option>🚶 Marche extérieur</option><option>🏃 Course tapis</option><option>🏃 Marche inclinée</option><option>🚴 Vélo extérieur</option><option>🌀 Elliptique</option><option>🪜 Escalier</option><option>💫 Autre</option></select>
           <input class="ex-input" placeholder="min" data-ex="off-j7-duree">
           <div class="cardio-check" id="off-check-j7" onclick="toggleOffCheck('j7')" style="margin:auto;"></div>
         </div>
@@ -436,6 +553,11 @@
         <div class="exercise-row">
           <input class="ex-input" placeholder="km" data-ex="off-j7-dist">
           <select class="ex-select" data-ex="off-j7-effort" style="grid-column:span 2;"><option value="">— Choisir —</option><option>😌 Facile</option><option>🙂 Modéré</option><option>😤 Difficile</option><option>🔥 Maximum</option></select>
+        </div>
+        <div class="steps-row" id="steps-j7">
+          <span class="steps-label">👣 Nombre de pas</span>
+          <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j7-pas" oninput="updateStepsBar('j7',this.value)">
+          <span class="steps-badge" id="steps-badge-j7" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
         </div>
       </div>
       <div class="off-mode" id="off-j7-abdo">
@@ -522,14 +644,273 @@
       <div class="empty-chart" id="water-empty"><span>💧</span>Saisis ta consommation d'eau<br>pour voir la courbe apparaître</div>
     </div>
   </div>
+
+  <div class="section-title">Évolution des pas</div>
+  <div class="chart-card">
+    <div class="chart-title">Nombre de pas · total semaine</div>
+    <div class="chart-subtitle">Total hebdomadaire · objectif 70 000 pas (84 000 max)</div>
+    <div class="chart-wrap">
+      <canvas id="stepsChart" style="display:none"></canvas>
+      <div class="empty-chart" id="steps-empty"><span>👣</span>Saisis tes pas lors de tes marches<br>pour voir l'évolution apparaître</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REWARDS ===== -->
+<div class="tab-content" id="tab-rewards">
+  <div style="padding-top:16px;">
+    <div class="rewards-summary">
+      <div class="rewards-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="rewards-ring-bg" cx="32" cy="32" r="28"/>
+          <circle class="rewards-ring-fill" id="rewards-ring-fill" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="175.9"/>
+        </svg>
+        <div class="rewards-ring-text">
+          <div class="rewards-count" id="rewards-count">0</div>
+          <div class="rewards-label">badges</div>
+        </div>
+      </div>
+      <div class="rewards-info">
+        <div class="rewards-info-title">Mes Trophées 🏆</div>
+        <div class="rewards-info-sub" id="rewards-total">0 / 32 débloqués · 0% complété</div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">🚀 Débutante</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-first-session"><div class="reward-medal">🌱</div><div class="reward-name">Premier pas</div><div class="reward-desc">1ère séance salle</div></div>
+        <div class="reward-card locked" id="r-first-water"><div class="reward-medal">💧</div><div class="reward-name">Hydratée</div><div class="reward-desc">Atteindre 2L un jour</div></div>
+        <div class="reward-card locked" id="r-first-steps"><div class="reward-medal">👣</div><div class="reward-name">Marcheuse</div><div class="reward-desc">Saisir ses pas pour la 1ère fois</div></div>
+        <div class="reward-card locked" id="r-first-cardio"><div class="reward-medal">🌬️</div><div class="reward-name">1ère sueur</div><div class="reward-desc">1er cardio salle coché</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">💪 Régularité</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-perfect-week"><div class="reward-medal">🔥</div><div class="reward-name">Semaine de feu</div><div class="reward-desc">4 séances en une semaine</div></div>
+        <div class="reward-card locked" id="r-two-weeks"><div class="reward-medal">📅</div><div class="reward-name">2 semaines</div><div class="reward-desc">3+ séances/sem pendant 2 sem</div></div>
+        <div class="reward-card locked" id="r-one-month"><div class="reward-medal">🌟</div><div class="reward-name">1 mois</div><div class="reward-desc">4 semaines de données</div></div>
+        <div class="reward-card locked" id="r-perfect-month"><div class="reward-medal">👑</div><div class="reward-name">Mois parfait</div><div class="reward-desc">4 sem · 4 séances chacune</div></div>
+        <div class="reward-card locked" id="r-consistency"><div class="reward-medal">🌙</div><div class="reward-name">Constance</div><div class="reward-desc">Jamais 2 semaines vides</div></div>
+        <div class="reward-card locked" id="r-eight-weeks"><div class="reward-medal">🦋</div><div class="reward-name">Transformation</div><div class="reward-desc">8 semaines de données</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">👣 Pas</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-steps-bronze"><div class="reward-medal">🥉</div><div class="reward-name">10k Club</div><div class="reward-desc">70 000 pas en une semaine</div></div>
+        <div class="reward-card locked" id="r-steps-silver"><div class="reward-medal">🥈</div><div class="reward-name">Marcheuse Pro</div><div class="reward-desc">70 000 pas 3 sem de suite</div></div>
+        <div class="reward-card locked" id="r-steps-gold"><div class="reward-medal">🥇</div><div class="reward-name">Ultra March</div><div class="reward-desc">84 000 pas en une semaine</div></div>
+        <div class="reward-card locked" id="r-5km"><div class="reward-medal">🌍</div><div class="reward-name">5 km</div><div class="reward-desc">5 km en une session</div></div>
+        <div class="reward-card locked" id="r-10km"><div class="reward-medal">🗺️</div><div class="reward-name">10 km</div><div class="reward-desc">10 km en une session</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">🏃 Cardio</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-cardio-addict"><div class="reward-medal">⚡</div><div class="reward-name">Cardio Addict</div><div class="reward-desc">3 cardios salle en une sem</div></div>
+        <div class="reward-card locked" id="r-full-cardio"><div class="reward-medal">🚀</div><div class="reward-name">Full Cardio</div><div class="reward-desc">4 cardios salle + 1 off</div></div>
+        <div class="reward-card locked" id="r-cardio-30min"><div class="reward-medal">🏃</div><div class="reward-name">30 minutes</div><div class="reward-desc">30 min cardio off en une session</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">💧 Hydratation</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-water-3days"><div class="reward-medal">🐠</div><div class="reward-name">Petite sirène</div><div class="reward-desc">2L · 3 jours dans la semaine</div></div>
+        <div class="reward-card locked" id="r-water-week"><div class="reward-medal">🌊</div><div class="reward-name">Grande vague</div><div class="reward-desc">2L tous les jours d'une sem</div></div>
+        <div class="reward-card locked" id="r-water-3weeks"><div class="reward-medal">💎</div><div class="reward-name">Cristal pur</div><div class="reward-desc">2L/jour · 3 semaines de suite</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">🧘 Abdos & Discipline</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-first-abdo"><div class="reward-medal">🎽</div><div class="reward-name">Core Activated</div><div class="reward-desc">1ère séance abdos off</div></div>
+        <div class="reward-card locked" id="r-abdo-3times"><div class="reward-medal">🗡️</div><div class="reward-name">Guerrière du core</div><div class="reward-desc">3 séances abdos en un mois</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">⚖️ Poids</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-1kg"><div class="reward-medal">⚖️</div><div class="reward-name">Premier kilo</div><div class="reward-desc">Perdre 1 kg depuis S1</div></div>
+        <div class="reward-card locked" id="r-2kg"><div class="reward-medal">🎯</div><div class="reward-name">Mi-chemin</div><div class="reward-desc">Perdre 2 kg depuis S1</div></div>
+        <div class="reward-card locked" id="r-49kg"><div class="reward-medal">✨</div><div class="reward-name">Presque là</div><div class="reward-desc">Atteindre 49 kg</div></div>
+        <div class="reward-card locked" id="r-48kg"><div class="reward-medal">🏆</div><div class="reward-name">Objectif !</div><div class="reward-desc">Peser 48 kg — tu l'as fait !</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">🏋️ Hip Thrust</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-ht20"><div class="reward-medal">💥</div><div class="reward-name">20 kg</div><div class="reward-desc">Hip Thrust 20 kg atteint</div></div>
+        <div class="reward-card locked" id="r-ht25"><div class="reward-medal">💥</div><div class="reward-name">25 kg</div><div class="reward-desc">Hip Thrust 25 kg atteint</div></div>
+        <div class="reward-card locked" id="r-ht30"><div class="reward-medal">🔱</div><div class="reward-name">30 kg</div><div class="reward-desc">Objectif final atteint !</div></div>
+      </div>
+    </div>
+
+    <div class="reward-category">
+      <div class="reward-category-title">🌈 Combo & Spéciaux</div>
+      <div class="reward-grid">
+        <div class="reward-card locked" id="r-balance"><div class="reward-medal">🌸</div><div class="reward-name">Équilibre parfait</div><div class="reward-desc">Séance + cardio + abdos + eau la même sem</div></div>
+        <div class="reward-card locked" id="r-ultimate"><div class="reward-medal">🎖️</div><div class="reward-name">Guerrière complète</div><div class="reward-desc">Pas + poids + HT 30kg la même sem</div></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast">✓ Semaine sauvegardée !</div>
+
+<!-- REWARD CELEBRATION OVERLAY -->
+<div class="reward-overlay" id="reward-overlay" onclick="closeRewardOverlay()">
+  <div class="reward-overlay-bg"></div>
+  <div class="reward-rings" id="reward-rings"></div>
+  <div class="reward-celebration" onclick="event.stopPropagation()">
+    <div class="reward-overlay-medal" id="overlay-medal"></div>
+    <div class="reward-overlay-badge">🏆 Reward débloqué</div>
+    <div class="reward-overlay-title" id="overlay-title"></div>
+    <div class="reward-overlay-desc" id="overlay-desc"></div>
+    <button class="reward-overlay-btn" onclick="closeRewardOverlay()">Continuer ✨</button>
+  </div>
+</div>
 
 <script>
   let currentWeek=1; const MAX_WEEKS=12; const allData={}; let selectedMens='taille'; let charts={};
   const goodDown=['taille','ventre','bras']; const goodUp=['cuisses','fesses','hanches'];
   const C={brown:'#8B5E3C',dark:'#5C3D20',mid:'#D4B896',green:'#7A9E7E',red:'#C45A5A',light:'#B89070'};
+
+  // ===== EXERCISE PICKER SYSTEM =====
+  const EXO_LISTS={
+    j1:['Hip Thrust','Presse jambes','Squat guidé','Fentes marchées','Fentes bulgares','Abduction assise','Adduction','RDL','Leg curl couché','Leg extension','Step-up','Glute kickback','Soulevé de terre jambes tendues','Good morning','Gainage planche','Dead bug','Crunch bicycle','Side plank'],
+    j2:['Face pull poulie','Rowing prise neutre','Rowing prise pronation','Lat pulldown pronation','Lat pulldown supination','Tirage vertical serré','Tirage horizontal','Rowing Pendlay','Hyperextension','Shrugs','Vacuum abdominal','Side plank','Crunch bicycle','Crunch oblique','Gainage planche','Planche','Russian twist'],
+    j4:['Hip Thrust','Presse jambes','Squat guidé','Fentes marchées','Fentes bulgares','Abduction assise','Adduction','RDL','Leg curl couché','Leg extension','Step-up','Glute kickback','Soulevé de terre jambes tendues','Good morning','Gainage planche','Dead bug','Crunch bicycle','Side plank'],
+    j5:['Face pull','Élévations latérales','Rowing Pendlay','Développé militaire','Oiseau','Tirage menton','Crunch bicycle','Crunch classique','Planche','Side plank','Dead bug','Vacuum abdominal','Leg raises','Russian twist','Crunch oblique','Hyperextension','Gainage planche']
+  };
+
+  // Extra exercises (added by user) per day
+  const extraExos={j1:[],j2:[],j4:[],j5:[]};
+  let activeDropdown=null;
+
+  function buildExtraRow(day,idx){
+    const prevData=currentWeek>1?(allData[`moi_week_${currentWeek-1}`]||{}):{};;
+    const exo=extraExos[day][idx];
+    const prevSaved=prevData[`extra-${day}`];
+    let prevVal='';
+    if(prevSaved){try{const prev=JSON.parse(prevSaved);if(prev[idx])prevVal=prev[idx].kg||'';}catch(e){}}
+    const prevHint=prevVal?`S${currentWeek-1} : ${prevVal} kg →`:'';
+    const row=document.createElement('div');
+    row.className='exercise-row';
+    row.style.gridTemplateColumns='1fr 65px 65px';
+    row.innerHTML=`
+      <div style="min-width:0;display:flex;align-items:center;gap:6px;">
+        <div class="ex-picker-wrap" style="flex:1;min-width:0;">
+          <button type="button" class="ex-picker-btn" onclick="openPicker('${day}',${idx},this)">
+            <span class="ex-name">${exo.name||'Choisir...'}</span>
+            <span class="ex-arrow">▼</span>
+          </button>
+        </div>
+        <button class="remove-exercise-btn" onclick="removeExtra('${day}',${idx})">✕</button>
+      </div>
+      <div>
+        <span style="display:block;font-size:0.65rem;font-style:italic;color:var(--brown);margin-bottom:3px;text-align:center;min-height:14px;">${prevHint}</span>
+        <input class="ex-input" placeholder="kg" value="${exo.kg||''}" oninput="extraExos['${day}'][${idx}].kg=this.value">
+      </div>
+      <input class="ex-input" placeholder="reps" value="${exo.reps||''}" oninput="extraExos['${day}'][${idx}].reps=this.value">`;
+    return row;
+  }
+
+  function renderExtraList(day){
+    const c=document.getElementById(`extra-list-${day}`);
+    if(!c)return;
+    c.innerHTML='';
+    extraExos[day].forEach((_,idx)=>c.appendChild(buildExtraRow(day,idx)));
+  }
+
+  function addExercise(day){
+    extraExos[day].push({name:'',kg:'',reps:''});
+    renderExtraList(day);
+    const rows=document.querySelectorAll(`#extra-list-${day} .exercise-row`);
+    const lastBtn=rows[rows.length-1]?.querySelector('.ex-picker-btn');
+    if(lastBtn) openPicker(day,extraExos[day].length-1,lastBtn);
+  }
+
+  function removeExtra(day,idx){
+    extraExos[day].splice(idx,1);
+    renderExtraList(day);
+    closeAllDropdowns();
+  }
+
+  function openPicker(day,idx,btn){
+    closeAllDropdowns();
+    const list=EXO_LISTS[day]||[];
+    const current=extraExos[day][idx]?.name||'';
+    const rect=btn.getBoundingClientRect();
+    const dropdown=document.createElement('div');
+    dropdown.className='ex-picker-dropdown open';
+    dropdown.id='picker-dropdown';
+    // Positionner sous le bouton, dans le viewport
+    const spaceBelow=window.innerHeight-rect.bottom;
+    const dropHeight=300;
+    let top, useFixed;
+    if(spaceBelow>=dropHeight||spaceBelow>=200){
+      top=rect.bottom+4;
+    } else {
+      top=rect.top-dropHeight-4;
+    }
+    const left=Math.max(8,Math.min(rect.left,window.innerWidth-296));
+    dropdown.style.cssText=`position:fixed;top:${top}px;left:${left}px;width:${Math.min(280,window.innerWidth-16)}px;`;
+    dropdown.innerHTML=`
+      <div class="ex-picker-search"><input type="text" placeholder="🔍 Rechercher..." id="picker-search" oninput="filterPicker(this.value,'${day}',${idx})" autocomplete="off"></div>
+      <div class="ex-picker-list" id="picker-list">${list.map(ex=>`<div class="ex-picker-item${ex===current?' selected':''}" onclick="selectExo('${day}',${idx},'${ex.replace(/'/g,"\\'")}')">${ex}</div>`).join('')}</div>
+      <div class="ex-picker-custom"><input type="text" placeholder="✏️ Personnalisé... (Entrée pour valider)" id="picker-custom" onkeydown="if(event.key==='Enter'&&this.value.trim())selectExo('${day}',${idx},this.value.trim())"></div>`;
+    document.body.appendChild(dropdown);
+    activeDropdown=dropdown;
+    setTimeout(()=>document.getElementById('picker-search')?.focus(),50);
+  }
+
+  function filterPicker(q,day,idx){
+    const list=EXO_LISTS[day]||[];
+    const current=extraExos[day][idx]?.name||'';
+    const filtered=q?list.filter(e=>e.toLowerCase().includes(q.toLowerCase())):list;
+    document.getElementById('picker-list').innerHTML=filtered.map(ex=>`<div class="ex-picker-item${ex===current?' selected':''}" onclick="selectExo('${day}',${idx},'${ex.replace(/'/g,"\\'")}')">${ex}</div>`).join('')||`<div style="padding:12px;font-size:0.78rem;color:var(--light);text-align:center;">Aucun résultat</div>`;
+  }
+
+  function selectExo(day,idx,name){
+    extraExos[day][idx].name=name;
+    closeAllDropdowns();
+    renderExtraList(day);
+  }
+
+  function closeAllDropdowns(){document.getElementById('picker-dropdown')?.remove();activeDropdown=null;}
+
+  document.addEventListener('click',e=>{
+    if(activeDropdown&&!activeDropdown.contains(e.target)&&!e.target.closest('.ex-picker-btn'))closeAllDropdowns();
+  });
+
+  function saveExtraState(day,data){
+    const rows=document.querySelectorAll(`#extra-list-${day} .exercise-row`);
+    rows.forEach((row,idx)=>{
+      const inputs=row.querySelectorAll('.ex-input');
+      if(extraExos[day][idx]){
+        if(inputs[0])extraExos[day][idx].kg=inputs[0].value;
+        if(inputs[1])extraExos[day][idx].reps=inputs[1].value;
+      }
+    });
+    data[`extra-${day}`]=JSON.stringify(extraExos[day]);
+  }
+
+  function loadExtraState(day,data){
+    const saved=data[`extra-${day}`];
+    if(saved){try{extraExos[day]=JSON.parse(saved);}catch(e){extraExos[day]=[];}}
+    else{extraExos[day]=[];}
+    renderExtraList(day);
+  }
+  // ===== END EXERCISE PICKER =====
 
   function getWK(){return `moi_week_${currentWeek}`;}
 
@@ -556,6 +937,7 @@
     document.getElementById('tab-'+tab).classList.add('active');
     btn.classList.add('active');
     if(tab==='graphiques') setTimeout(renderAll,80);
+    if(tab==='rewards'){renderRewards();checkRewards();}
   }
 
   function changeWeek(dir){
@@ -565,12 +947,33 @@
     loadData();
   }
 
-  function toggleDay(d){document.getElementById('card-'+d).classList.toggle('open');}
-  function toggleCardio(d){const el=document.getElementById('cardio-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';}
-  function togglePresence(d){document.getElementById('pd-'+d).classList.toggle('done');}
-  function toggleOffCheck(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';}
-  function toggleOffExo(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';}
+  // ===== AUTO-SAVE =====
+  let autoSaveTimer=null;
+  function autoSave(){
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer=setTimeout(()=>saveData(true),800);
+  }
 
+  function toggleDay(d){document.getElementById('card-'+d).classList.toggle('open');}
+  function toggleCardio(d){const el=document.getElementById('cardio-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';autoSave();}
+  function togglePresence(d){document.getElementById('pd-'+d).classList.toggle('done');autoSave();}
+  function toggleOffCheck(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';autoSave();}
+  function toggleOffExo(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';autoSave();}
+  function toggleSteps(day, val){
+    const isMarche=val.includes('Marche');
+    const row=document.getElementById('steps-'+day);
+    if(row) row.classList.toggle('visible', isMarche);
+  }
+  function updateStepsBar(day, val){
+    const badge=document.getElementById('steps-badge-'+day);
+    if(!badge) return;
+    const steps=parseInt(val);
+    if(isNaN(steps)||steps<=0){badge.textContent='';return;}
+    if(steps>=12000){badge.textContent='🔥 Objectif dépassé !';badge.style.color='#7A9E7E';}
+    else if(steps>=10000){badge.textContent='✅ Objectif atteint !';badge.style.color='#7A9E7E';}
+    else if(steps>=7000){badge.textContent=`⚡ ${(10000-steps).toLocaleString('fr')} pas restants`;badge.style.color='var(--brown)';}
+    else{badge.textContent=`${(10000-steps).toLocaleString('fr')} pas restants`;badge.style.color='var(--light)';}
+  }
   function switchOffMode(day, mode, btn){
     // Toggle buttons
     btn.parentElement.querySelectorAll('.off-toggle-btn').forEach(b=>b.classList.remove('active'));
@@ -591,6 +994,7 @@
     const data={};
     data.poids=document.getElementById('poidsInput').value;
     [1,2,3,4,5,6,7].forEach(d=>{data['water-d'+d]=document.getElementById('water-d'+d).value;});
+    ['j1','j2','j4','j5'].forEach(j=>saveExtraState(j,data));
     ['taille','hanches','cuisses','ventre','bras','fesses'].forEach(m=>{data['m-'+m]=document.getElementById('m-'+m).value;});
     document.querySelectorAll('[data-ex]').forEach(el=>{data[el.dataset.ex]=el.value;});
     document.querySelectorAll('[data-note]').forEach(el=>{data['note-'+el.dataset.note]=el.value;});
@@ -615,7 +1019,8 @@
     allData[getWK()]=data;
     try{localStorage.setItem('fitnessTrackerMoi',JSON.stringify(allData));}catch(e){}
     updateUI();
-    if(!silent) showToast();
+    if(!silent) showToast('✓ Semaine sauvegardée !');
+    checkRewards();
   }
 
   function loadData(){
@@ -624,6 +1029,7 @@
     document.getElementById('poidsInput').value=data.poids||'';
     [1,2,3,4,5,6,7].forEach(d=>{document.getElementById('water-d'+d).value=data['water-d'+d]||'';});
     updateWaterBar();
+    ['j1','j2','j4','j5'].forEach(j=>loadExtraState(j,data));
     ['taille','hanches','cuisses','ventre','bras','fesses'].forEach(m=>{
       const el=document.getElementById('m-'+m);
       if(el) el.value=data['m-'+m]||'';
@@ -646,6 +1052,7 @@
       c.classList.toggle('done',!!data['cardio-'+j]);
       c.textContent=data['cardio-'+j]?'✓':'';
       document.getElementById('pd-'+j).classList.toggle('done',!!data['presence-'+j]);
+      updateStepsBar(j, data[j+'-pas']||'');
     });
     // Off days
     ['j3','j6','j7'].forEach(j=>{
@@ -660,6 +1067,9 @@
       const oc=document.getElementById('off-check-'+j);
       oc.classList.toggle('done',!!data['off-done-'+j]);
       oc.textContent=data['off-done-'+j]?'✓':'';
+      // Restore steps visibility
+      toggleSteps(j, data['off-'+j+'-type']||'');
+      updateStepsBar(j, data['off-'+j+'-pas']||'');
       // Abdo exos
       ['bc','pl','cr','db','sp','va'].forEach(k=>{
         const el=document.getElementById('off-check-'+j+'-'+k);
@@ -743,6 +1153,32 @@
     renderMensChart(L);
     updateStats();
 
+    // Graphique pas
+    const stepsData=Array.from({length:MAX_WEEKS},(_,i)=>{
+      const d=allData[`moi_week_${i+1}`]||{};
+      let total=0; let hasAny=false;
+      // Jours salle
+      ['j1','j2','j4','j5'].forEach(j=>{const v=parseInt(d[j+'-pas']);if(!isNaN(v)&&v>0){total+=v;hasAny=true;}});
+      // Jours off marche
+      ['j3','j6','j7'].forEach(j=>{
+        const type=d['off-'+j+'-type']||'';
+        const v=parseInt(d['off-'+j+'-pas']);
+        if(type.includes('Marche')&&!isNaN(v)&&v>0){total+=v;hasAny=true;}
+      });
+      return hasAny?total:null;
+    });
+    const hasSteps=stepsData.some(v=>v!==null);
+    document.getElementById('stepsChart').style.display=hasSteps?'block':'none';
+    document.getElementById('steps-empty').style.display=hasSteps?'none':'flex';
+    if(hasSteps){
+      if(charts.steps) charts.steps.destroy();
+      charts.steps=new Chart(document.getElementById('stepsChart'),{type:'line',data:{labels:L,datasets:[
+        {data:stepsData,borderColor:C.brown,backgroundColor:'rgba(139,94,60,0.08)',borderWidth:2.5,pointBackgroundColor:C.dark,pointRadius:4,tension:0.4,spanGaps:true,fill:true},
+        {data:Array(MAX_WEEKS).fill(70000),borderColor:C.green,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false},
+        {data:Array(MAX_WEEKS).fill(84000),borderColor:C.mid,borderWidth:1,borderDash:[2,4],pointRadius:0,fill:false}
+      ]},options:{...baseOpts(ctx=>ctx.parsed.y.toLocaleString('fr')+' pas'),scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:C.light}},y:{min:0,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:C.light,callback:v=>v>=1000?(v/1000)+'k':v}}}}});
+    }
+
     // Graphique eau
     const waterData=Array.from({length:MAX_WEEKS},(_,i)=>{
       const d=allData[`moi_week_${i+1}`]||{};
@@ -804,13 +1240,215 @@
     else{spEl.textContent='—';spEl.style.color=C.dark;}
   }
 
-  function showToast(){
+  function showToast(msg){
     const t=document.getElementById('toast');
+    t.textContent=msg||'✓ Sauvegarde automatique';
     t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),2500);
+    setTimeout(()=>t.classList.remove('show'),2000);
+  }
+
+  // Queue pour afficher les rewards un par un
+  let rewardQueue=[];
+  let overlayOpen=false;
+
+  function showRewardToast(name,icon,desc){
+    rewardQueue.push({name,icon,desc});
+    if(!overlayOpen) processRewardQueue();
+  }
+
+  function processRewardQueue(){
+    if(rewardQueue.length===0){overlayOpen=false;return;}
+    overlayOpen=true;
+    const {name,icon,desc}=rewardQueue.shift();
+    document.getElementById('overlay-medal').textContent=icon;
+    document.getElementById('overlay-title').textContent=name;
+    document.getElementById('overlay-desc').textContent=desc;
+    // Particles
+    const rings=document.getElementById('reward-rings');
+    rings.innerHTML='';
+    // Anneaux
+    for(let i=0;i<3;i++){
+      const r=document.createElement('div');
+      r.className='reward-ring-anim';
+      r.style.animationDelay=(i*0.5)+'s';
+      rings.appendChild(r);
+    }
+    // Particules colorées
+    const colors=['#D4B896','#8B5E3C','#F2E8DC','#5C3D20','#E8D5B8','#A0785A'];
+    for(let i=0;i<24;i++){
+      const p=document.createElement('div');
+      p.className='particle'+(Math.random()>0.5?' square':'');
+      const angle=Math.random()*Math.PI*2;
+      const dist=120+Math.random()*180;
+      p.style.cssText=`left:50%;top:30%;background:${colors[Math.floor(Math.random()*colors.length)]};--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-delay:${Math.random()*0.3}s;animation-duration:${0.8+Math.random()*0.6}s;`;
+      rings.appendChild(p);
+    }
+    document.getElementById('reward-overlay').classList.add('show');
+  }
+
+  function closeRewardOverlay(){
+    document.getElementById('reward-overlay').classList.remove('show');
+    setTimeout(processRewardQueue, 400);
+  }
+
+  const REWARDS_DEFS=[
+    {id:'r-first-session',name:'Premier pas',icon:'🌱',desc:'Ta première séance salle est validée !'},
+    {id:'r-first-water',name:'Hydratée',icon:'💧',desc:'Tu as atteint 2L d\'eau en une journée !'},
+    {id:'r-first-steps',name:'Marcheuse',icon:'👣',desc:'Tes premiers pas sont tracés !'},
+    {id:'r-first-cardio',name:'Première sueur',icon:'🌬️',desc:'Premier cardio salle coché !'},
+    {id:'r-perfect-week',name:'Semaine de feu',icon:'🔥',desc:'4 séances en une seule semaine !'},
+    {id:'r-two-weeks',name:'2 semaines',icon:'📅',desc:'3+ séances pendant 2 semaines de suite !'},
+    {id:'r-one-month',name:'1 mois de suivi',icon:'🌟',desc:'4 semaines de données saisies. Tu t\'y tiens !'},
+    {id:'r-perfect-month',name:'Mois parfait',icon:'👑',desc:'4 semaines · 4 séances chacune. Royale !'},
+    {id:'r-consistency',name:'Constance',icon:'🌙',desc:'Jamais 2 semaines vides de suite !'},
+    {id:'r-eight-weeks',name:'Transformation',icon:'🦋',desc:'8 semaines de suivi consécutif !'},
+    {id:'r-steps-bronze',name:'10k Club',icon:'🥉',desc:'70 000 pas en une seule semaine !'},
+    {id:'r-steps-silver',name:'Marcheuse Pro',icon:'🥈',desc:'70 000 pas · 3 semaines de suite !'},
+    {id:'r-steps-gold',name:'Ultra March',icon:'🥇',desc:'84 000 pas en une semaine. Incroyable !'},
+    {id:'r-5km',name:'5 km',icon:'🌍',desc:'5 km parcourus en une session !'},
+    {id:'r-10km',name:'10 km',icon:'🗺️',desc:'10 km ! Tu es une vraie marcheuse !'},
+    {id:'r-cardio-addict',name:'Cardio Addict',icon:'⚡',desc:'3 cardios salle en une semaine !'},
+    {id:'r-full-cardio',name:'Full Cardio',icon:'🚀',desc:'4 cardios salle + 1 jour off cardio !'},
+    {id:'r-cardio-30min',name:'30 minutes',icon:'🏃',desc:'30 min de cardio off en une session !'},
+    {id:'r-water-3days',name:'Petite sirène',icon:'🐠',desc:'2L atteints 3 jours dans la semaine !'},
+    {id:'r-water-week',name:'Grande vague',icon:'🌊',desc:'2L tous les jours de la semaine !'},
+    {id:'r-water-3weeks',name:'Cristal pur',icon:'💎',desc:'2L/jour pendant 3 semaines de suite !'},
+    {id:'r-first-abdo',name:'Core Activated',icon:'🎽',desc:'Première séance abdos off complétée !'},
+    {id:'r-abdo-3times',name:'Guerrière du core',icon:'🗡️',desc:'3 séances abdos off en un mois !'},
+    {id:'r-1kg',name:'Premier kilo',icon:'⚖️',desc:'1 kg perdu depuis le début. Continue !'},
+    {id:'r-2kg',name:'Mi-chemin',icon:'🎯',desc:'2 kg perdus. Tu es à mi-chemin !'},
+    {id:'r-49kg',name:'Presque là',icon:'✨',desc:'49 kg atteints. Plus qu\'un kilo !'},
+    {id:'r-48kg',name:'Objectif atteint !',icon:'🏆',desc:'48 kg ! Tu as réussi. Félicitations 🎉'},
+    {id:'r-ht20',name:'Hip Thrust 20 kg',icon:'💥',desc:'20 kg au Hip Thrust. La force est là !'},
+    {id:'r-ht25',name:'Hip Thrust 25 kg',icon:'💥',desc:'25 kg au Hip Thrust. Tu progresses !'},
+    {id:'r-ht30',name:'Hip Thrust 30 kg',icon:'🔱',desc:'30 kg ! Objectif final atteint !'},
+    {id:'r-balance',name:'Équilibre parfait',icon:'🌸',desc:'Séance + cardio + abdos + eau la même semaine !'},
+    {id:'r-ultimate',name:'Guerrière complète',icon:'🎖️',desc:'Pas + poids + HT 30kg la même semaine. Légendaire !'},
+  ];
+
+  let unlockedRewards=new Set();
+  let newlyUnlocked=new Set();
+  try{unlockedRewards=new Set(JSON.parse(localStorage.getItem('moi_rewards')||'[]'));}catch(e){}
+
+  function unlockReward(id){
+    if(!REWARDS_DEFS.find(r=>r.id===id)) return;
+    newlyUnlocked.add(id);
+  }
+
+  function checkRewards(){
+    const previouslyUnlocked=new Set(unlockedRewards);
+    newlyUnlocked=new Set();
+
+    let hasAnySession=false,hasAnyCardio=false,hasAnySteps=false;
+    let perfectWeeks=0,weeksWithData=0,consecutiveWeeks=0,maxConsecutive=0;
+    let silverStreak=0,totalAbdo=0,waterStreak=0,maxHt=0;
+    const w1data=allData['moi_week_1']||{};
+    const startPoids=parseFloat(w1data.poids);
+
+    for(let i=1;i<=MAX_WEEKS;i++){
+      const d=allData[`moi_week_${i}`]||{};
+      if(Object.keys(d).length===0){consecutiveWeeks=0;silverStreak=0;waterStreak=0;continue;}
+      weeksWithData++;consecutiveWeeks++;maxConsecutive=Math.max(maxConsecutive,consecutiveWeeks);
+      const seances=['j1','j2','j4','j5'].filter(j=>d['presence-'+j]).length;
+      if(seances>0) hasAnySession=true;
+      if(seances>=4){perfectWeeks++;unlockReward('r-perfect-week');}
+      const cardioSalle=['j1','j2','j4','j5'].filter(j=>d['cardio-'+j]).length;
+      if(cardioSalle>0) hasAnyCardio=true;
+      if(cardioSalle>=3) unlockReward('r-cardio-addict');
+      const offCardio=['j3','j6','j7'].filter(j=>d['off-'+j+'-mode']==='cardio'&&d['off-done-'+j]).length;
+      if(cardioSalle>=4&&offCardio>=1) unlockReward('r-full-cardio');
+      ['j3','j6','j7'].forEach(j=>{const v=parseInt(d['off-'+j+'-duree']);if(!isNaN(v)&&v>=30&&d['off-'+j+'-mode']==='cardio'&&d['off-done-'+j])unlockReward('r-cardio-30min');});
+      let weekSteps=0;
+      ['j1','j2','j4','j5'].forEach(j=>{const v=parseInt(d[j+'-pas']);if(!isNaN(v)&&v>0){weekSteps+=v;hasAnySteps=true;}});
+      ['j3','j6','j7'].forEach(j=>{const type=d['off-'+j+'-type']||'';const v=parseInt(d['off-'+j+'-pas']);if(type.includes('Marche')&&!isNaN(v)&&v>0){weekSteps+=v;hasAnySteps=true;}});
+      if(weekSteps>=70000){silverStreak++;unlockReward('r-steps-bronze');if(silverStreak>=3)unlockReward('r-steps-silver');}else{silverStreak=0;}
+      if(weekSteps>=84000) unlockReward('r-steps-gold');
+      ['j3','j6','j7'].forEach(j=>{const type=d['off-'+j+'-type']||'';const v=parseFloat(d['off-'+j+'-dist']);if(type.includes('Marche')&&!isNaN(v)){if(v>=5)unlockReward('r-5km');if(v>=10)unlockReward('r-10km');}});
+      const waterDays=[1,2,3,4,5,6,7].filter(day=>parseFloat(d['water-d'+day])>=2).length;
+      if(waterDays>=1) unlockReward('r-first-water');
+      if(waterDays>=3) unlockReward('r-water-3days');
+      if(waterDays>=7){unlockReward('r-water-week');waterStreak++;}else{waterStreak=0;}
+      if(waterStreak>=3) unlockReward('r-water-3weeks');
+      const abdoDone=['j3','j6','j7'].filter(j=>d['off-'+j+'-mode']==='abdo'&&['bc','pl','cr','db','sp','va'].some(k=>d['off-done-'+j+'-'+k])).length;
+      if(abdoDone>0) unlockReward('r-first-abdo');
+      totalAbdo+=abdoDone;
+      if(totalAbdo>=3) unlockReward('r-abdo-3times');
+      const poids=parseFloat(d.poids);
+      if(!isNaN(poids)&&!isNaN(startPoids)){const perdu=startPoids-poids;if(perdu>=1)unlockReward('r-1kg');if(perdu>=2)unlockReward('r-2kg');if(poids<=49)unlockReward('r-49kg');if(poids<=48)unlockReward('r-48kg');}
+      const ht=parseFloat(d['j1-ht-k']||d['j4-ht-k']||0);
+      if(!isNaN(ht)&&ht>maxHt) maxHt=ht;
+      if(maxHt>=20) unlockReward('r-ht20');
+      if(maxHt>=25) unlockReward('r-ht25');
+      if(maxHt>=30) unlockReward('r-ht30');
+      if(seances>=1&&offCardio>=1&&abdoDone>=1&&waterDays>=2) unlockReward('r-balance');
+      if(weekSteps>=70000&&!isNaN(poids)&&poids<=48&&maxHt>=30) unlockReward('r-ultimate');
+    }
+    if(hasAnySession) unlockReward('r-first-session');
+    if(hasAnyCardio) unlockReward('r-first-cardio');
+    if(hasAnySteps) unlockReward('r-first-steps');
+    if(weeksWithData>=4) unlockReward('r-one-month');
+    if(weeksWithData>=8&&maxConsecutive>=8) unlockReward('r-eight-weeks');
+    if(perfectWeeks>=4) unlockReward('r-perfect-month');
+    let twoWeekStreak=0;
+    for(let i=1;i<=MAX_WEEKS;i++){const d=allData[`moi_week_${i}`]||{};const s=['j1','j2','j4','j5'].filter(j=>d['presence-'+j]).length;if(s>=3)twoWeekStreak++;else twoWeekStreak=0;if(twoWeekStreak>=2){unlockReward('r-two-weeks');break;}}
+    let neverSkipped=true,prevEmpty=false;
+    for(let i=1;i<=MAX_WEEKS;i++){const d=allData[`moi_week_${i}`]||{};const empty=Object.keys(d).length===0;if(empty&&prevEmpty){neverSkipped=false;break;}prevEmpty=empty;}
+    if(neverSkipped&&weeksWithData>=2) unlockReward('r-consistency');
+
+    // Mettre à jour unlockedRewards = exactement ce qui a été validé ce cycle
+    unlockedRewards=new Set(newlyUnlocked);
+    localStorage.setItem('moi_rewards',JSON.stringify([...unlockedRewards]));
+
+    // Notifier uniquement les nouveaux rewards (pas dans previouslyUnlocked)
+    newlyUnlocked.forEach(id=>{
+      if(!previouslyUnlocked.has(id)){
+        const def=REWARDS_DEFS.find(r=>r.id===id);
+        if(def) showRewardToast(def.name,def.icon,def.desc||'');
+      }
+    });
+
+    renderRewards();
+  }
+
+  function renderRewards(){
+    let count=0;
+    const total=REWARDS_DEFS.length;
+    REWARDS_DEFS.forEach(r=>{
+      const el=document.getElementById(r.id);
+      if(!el) return;
+      if(unlockedRewards.has(r.id)){
+        count++;
+        el.classList.remove('locked');
+        el.classList.add('unlocked');
+      } else {
+        el.classList.add('locked');
+        el.classList.remove('unlocked');
+      }
+    });
+    document.getElementById('rewards-count').textContent=count;
+    document.getElementById('rewards-total').textContent=`${count} / ${total} débloqués · ${Math.round((count/total)*100)}% complété`;
+    const circumference=175.9;
+    const pct=count/total;
+    const offset=circumference-(pct*circumference);
+    const ring=document.getElementById('rewards-ring-fill');
+    if(ring) ring.style.strokeDashoffset=offset;
   }
 
   loadData();
+  renderRewards();
+  checkRewards();
+
+  // Écouter tous les inputs/textareas pour auto-save
+  document.addEventListener('input', e=>{
+    if(e.target.matches('input,textarea,select')&&!e.target.closest('.ex-picker-dropdown')){
+      autoSave();
+    }
+  });
+  document.addEventListener('change', e=>{
+    if(e.target.matches('select')&&!e.target.closest('.ex-picker-dropdown')){
+      autoSave();
+    }
+  });
 </script>
 </body>
 </html>
