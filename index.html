@@ -344,116 +344,10 @@
     <button class="week-btn" onclick="changeWeek(1)">›</button>
   </div>
 
-  <!-- J1 -->
-  <div class="day-card" id="card-j1">
-    <div class="day-header" onclick="toggleDay('j1')">
-      <div class="day-info"><div class="day-dot bas">🍑</div><div><div class="day-name">Jour 1 — Bas A</div><div class="day-focus">Fesses + Cuisses</div></div></div>
-      <div class="day-chevron">▼</div>
-    </div>
-    <div class="day-body">
-      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-ht-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-ht-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-ht-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-ab-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Presse cuisses (pieds hauts)</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-pj-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-pj-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-pj-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Fentes bulgares</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j1-fb-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-fb-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-fb-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Gainage planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j1-pl-r"></div>
-      <div id="extra-list-j1"></div>
-      <button class="add-exercise-btn" onclick="addExercise('j1')">+ Ajouter un exercice</button>
-      <div class="cardio-row"><div><div class="cardio-label">🪜 Escalier · 15 min</div><div class="cardio-sub">Rythme soutenu</div></div><div class="cardio-check" id="cardio-j1" onclick="toggleCardio('j1')"></div></div>
-      <div class="steps-row visible" id="steps-j1" style="display:flex;">
-        <span class="steps-label">👣 Nombre de pas</span>
-        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j1-pas" oninput="updateStepsBar('j1',this.value)">
-        <span class="steps-badge" id="steps-badge-j1" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-      </div>
-      <textarea class="note-area" placeholder="Notes..." data-note="j1"></textarea>
-    </div>
-  </div>
-
-  <!-- J2 -->
-  <div class="day-card" id="card-j2">
-    <div class="day-header" onclick="toggleDay('j2')">
-      <div class="day-info"><div class="day-dot haut">🏋️</div><div><div class="day-name">Jour 2 — Dos + Taille</div><div class="day-focus">Sculpter sans gonfler les bras</div></div></div>
-      <div class="day-chevron">▼</div>
-    </div>
-    <div class="day-body">
-      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Face pull poulie</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-fp-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-fp-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-fp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Rowing prise neutre</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-rw-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-rw-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-rw-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Lat pulldown pronation</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-lp-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-lp-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-lp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j2-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-hy-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Vacuum abdominal</div><span class="exercise-tag normal">3x20s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-va-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Side plank</div><span class="exercise-tag normal">3x30s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-sp-r"></div>
-      <div id="extra-list-j2"></div>
-      <button class="add-exercise-btn" onclick="addExercise('j2')">+ Ajouter un exercice</button>
-      <div class="cardio-row"><div><div class="cardio-label">🚴 Vélo stationnaire · 15 min</div><div class="cardio-sub">Résistance moyenne</div></div><div class="cardio-check" id="cardio-j2" onclick="toggleCardio('j2')"></div></div>
-      <div class="steps-row visible" id="steps-j2" style="display:flex;">
-        <span class="steps-label">👣 Nombre de pas</span>
-        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j2-pas" oninput="updateStepsBar('j2',this.value)">
-        <span class="steps-badge" id="steps-badge-j2" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-      </div>
-      <textarea class="note-area" placeholder="Notes..." data-note="j2"></textarea>
-    </div>
-  </div>
-
-  <!-- J4 -->
-  <div class="day-card" id="card-j4">
-    <div class="day-header" onclick="toggleDay('j4')">
-      <div class="day-info"><div class="day-dot bas">🍑</div><div><div class="day-name">Jour 4 — Bas B</div><div class="day-focus">Fesses + Ischio</div></div></div>
-      <div class="day-chevron">▼</div>
-    </div>
-    <div class="day-body">
-      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ht-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ht-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ht-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">RDL</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-rdl-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-rdl-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-rdl-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ab-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Step-up haut</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j4-su-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-su-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-su-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Dead bug</div><span class="exercise-tag normal">3x10</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j4-db-r"></div>
-      <div id="extra-list-j4"></div>
-      <button class="add-exercise-btn" onclick="addExercise('j4')">+ Ajouter un exercice</button>
-      <div class="cardio-row"><div><div class="cardio-label">🏃 Tapis incliné · 15 min</div><div class="cardio-sub">Marche rapide</div></div><div class="cardio-check" id="cardio-j4" onclick="toggleCardio('j4')"></div></div>
-      <div class="steps-row visible" id="steps-j4" style="display:flex;">
-        <span class="steps-label">👣 Nombre de pas</span>
-        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j4-pas" oninput="updateStepsBar('j4',this.value)">
-        <span class="steps-badge" id="steps-badge-j4" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-      </div>
-      <textarea class="note-area" placeholder="Notes..." data-note="j4"></textarea>
-    </div>
-  </div>
-
-  <!-- J5 -->
-  <div class="day-card" id="card-j5">
-    <div class="day-header" onclick="toggleDay('j5')">
-      <div class="day-info"><div class="day-dot haut">🏋️</div><div><div class="day-name">Jour 5 — Épaules + Abdos</div><div class="day-focus">Silhouette haut + taille fine</div></div></div>
-      <div class="day-chevron">▼</div>
-    </div>
-    <div class="day-body">
-      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
-      <div class="exercise-row"><div><div class="exercise-name">Face pull</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j5-fp-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-fp-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-fp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Rowing Pendlay</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j5-rp-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-rp-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-rp-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Crunch bicycle</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j5-bc-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Élévations latérales</div><span class="exercise-tag normal">3x15</span></div><div><span class="prev-kg" id="prev-j5-el-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-el-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-el-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j5-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-hy-r"></div>
-      <div class="exercise-row"><div><div class="exercise-name">Planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j5-pl-r"></div>
-      <div id="extra-list-j5"></div>
-      <button class="add-exercise-btn" onclick="addExercise('j5')">+ Ajouter un exercice</button>
-      <div class="cardio-row"><div><div class="cardio-label">🌀 Elliptique · 15 min</div><div class="cardio-sub">Rythme modéré</div></div><div class="cardio-check" id="cardio-j5" onclick="toggleCardio('j5')"></div></div>
-      <div class="steps-row visible" id="steps-j5" style="display:flex;">
-        <span class="steps-label">👣 Nombre de pas</span>
-        <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j5-pas" oninput="updateStepsBar('j5',this.value)">
-        <span class="steps-badge" id="steps-badge-j5" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-      </div>
-      <textarea class="note-area" placeholder="Notes..." data-note="j5"></textarea>
-    </div>
-  </div>
-
-  <!-- JOURS OFF -->
-  <div class="off-separator">Jours off — Cardio ou Abdos</div>
-
-  <!-- Macro pour générer les 3 jours off -->
-  <!-- OFF J3 -->
+  <!-- Lundi OFF -->
   <div class="day-card off-card" id="card-off-j3">
     <div class="day-header" onclick="toggleDay('off-j3')">
-      <div class="day-info"><div class="day-dot off">🔄</div><div><div class="day-name">Jour 3 — Off</div><div class="day-focus" id="off-focus-j3">Cardio ou Abdos</div></div></div>
+      <div class="day-info"><div class="day-dot off">🔄</div><div><div class="day-name">Lundi — Off</div><div class="day-focus" id="off-focus-j3">Cardio ou Abdos</div></div></div>
       <div class="day-chevron">▼</div>
     </div>
     <div class="day-body">
@@ -461,7 +355,6 @@
         <button class="off-toggle-btn active" onclick="switchOffMode('j3','cardio',this)">🏃 Cardio</button>
         <button class="off-toggle-btn" onclick="switchOffMode('j3','abdo',this)">💪 Abdos</button>
       </div>
-      <!-- MODE CARDIO -->
       <div class="off-mode active" id="off-j3-cardio">
         <div class="col-headers"><div class="col-header">Type</div><div class="col-header">Durée</div><div class="col-header">Fait</div></div>
         <div class="exercise-row">
@@ -474,13 +367,8 @@
           <input class="ex-input" placeholder="km" data-ex="off-j3-dist">
           <select class="ex-select" data-ex="off-j3-effort" style="grid-column:span 2;"><option value="">— Choisir —</option><option>😌 Facile</option><option>🙂 Modéré</option><option>😤 Difficile</option><option>🔥 Maximum</option></select>
         </div>
-        <div class="steps-row" id="steps-j3">
-          <span class="steps-label">👣 Nombre de pas</span>
-          <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j3-pas" oninput="updateStepsBar('j3',this.value)">
-          <span class="steps-badge" id="steps-badge-j3" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-        </div>
+        <div class="steps-row" id="steps-j3"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j3-pas" oninput="updateStepsBar('j3',this.value)"><span class="steps-badge" id="steps-badge-j3" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
       </div>
-      <!-- MODE ABDO -->
       <div class="off-mode" id="off-j3-abdo">
         <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Reps/sec</div><div class="col-header">Fait</div></div>
         <div class="exercise-row"><div><div class="exercise-name">Crunch bicycle</div><span class="exercise-tag normal">3x20</span></div><input class="ex-input" placeholder="reps" data-ex="off-j3-bc-r"><div class="cardio-check" id="off-check-j3-bc" onclick="toggleOffExo('j3-bc')" style="margin:auto;"></div></div>
@@ -494,10 +382,57 @@
     </div>
   </div>
 
-  <!-- OFF J6 -->
+  <div style="height:1px;background:var(--brown-mid);margin:4px 0 12px;border-radius:2px;opacity:0.4;"></div>
+
+  <!-- Mardi J1 -->
+  <div class="day-card" id="card-j1">
+    <div class="day-header" onclick="toggleDay('j1')">
+      <div class="day-info"><div class="day-dot bas">🍑</div><div><div class="day-name">Mardi — Bas A</div><div class="day-focus">Fesses + Cuisses</div></div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-ht-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-ht-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-ht-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-ab-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Presse cuisses (pieds hauts)</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j1-pj-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-pj-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-pj-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Fentes bulgares</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j1-fb-k"></span><input class="ex-input" placeholder="kg" data-ex="j1-fb-k"></div><input class="ex-input" placeholder="reps" data-ex="j1-fb-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Gainage planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j1-pl-r"></div>
+      <div id="extra-list-j1"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j1')">+ Ajouter un exercice</button>
+      <div class="cardio-row"><div><div class="cardio-label">🪜 Escalier · 15 min</div><div class="cardio-sub">Rythme soutenu</div></div><div class="cardio-check" id="cardio-j1" onclick="toggleCardio('j1')"></div></div>
+      <div class="steps-row visible" id="steps-j1" style="display:flex;"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j1-pas" oninput="updateStepsBar('j1',this.value)"><span class="steps-badge" id="steps-badge-j1" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
+      <textarea class="note-area" placeholder="Notes..." data-note="j1"></textarea>
+    </div>
+  </div>
+
+  <!-- Mercredi J2 -->
+  <div class="day-card" id="card-j2">
+    <div class="day-header" onclick="toggleDay('j2')">
+      <div class="day-info"><div class="day-dot haut">🏋️</div><div><div class="day-name">Mercredi — Dos + Taille</div><div class="day-focus">Sculpter sans gonfler les bras</div></div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
+      <div class="exercise-row"><div><div class="exercise-name">Face pull poulie</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-fp-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-fp-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-fp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Rowing prise neutre</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-rw-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-rw-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-rw-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Lat pulldown pronation</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j2-lp-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-lp-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-lp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j2-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j2-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j2-hy-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Vacuum abdominal</div><span class="exercise-tag normal">3x20s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-va-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Side plank</div><span class="exercise-tag normal">3x30s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j2-sp-r"></div>
+      <div id="extra-list-j2"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j2')">+ Ajouter un exercice</button>
+      <div class="cardio-row"><div><div class="cardio-label">🚴 Vélo stationnaire · 15 min</div><div class="cardio-sub">Résistance moyenne</div></div><div class="cardio-check" id="cardio-j2" onclick="toggleCardio('j2')"></div></div>
+      <div class="steps-row visible" id="steps-j2" style="display:flex;"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j2-pas" oninput="updateStepsBar('j2',this.value)"><span class="steps-badge" id="steps-badge-j2" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
+      <textarea class="note-area" placeholder="Notes..." data-note="j2"></textarea>
+    </div>
+  </div>
+
+  <div style="height:1px;background:var(--brown-mid);margin:4px 0 12px;border-radius:2px;opacity:0.4;"></div>
+
+  <!-- Jeudi OFF -->
   <div class="day-card off-card" id="card-off-j6">
     <div class="day-header" onclick="toggleDay('off-j6')">
-      <div class="day-info"><div class="day-dot off">🔄</div><div><div class="day-name">Jour 6 — Off</div><div class="day-focus" id="off-focus-j6">Cardio ou Abdos</div></div></div>
+      <div class="day-info"><div class="day-dot off">🔄</div><div><div class="day-name">Jeudi — Off</div><div class="day-focus" id="off-focus-j6">Cardio ou Abdos</div></div></div>
       <div class="day-chevron">▼</div>
     </div>
     <div class="day-body">
@@ -517,11 +452,7 @@
           <input class="ex-input" placeholder="km" data-ex="off-j6-dist">
           <select class="ex-select" data-ex="off-j6-effort" style="grid-column:span 2;"><option value="">— Choisir —</option><option>😌 Facile</option><option>🙂 Modéré</option><option>😤 Difficile</option><option>🔥 Maximum</option></select>
         </div>
-        <div class="steps-row" id="steps-j6">
-          <span class="steps-label">👣 Nombre de pas</span>
-          <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j6-pas" oninput="updateStepsBar('j6',this.value)">
-          <span class="steps-badge" id="steps-badge-j6" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-        </div>
+        <div class="steps-row" id="steps-j6"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j6-pas" oninput="updateStepsBar('j6',this.value)"><span class="steps-badge" id="steps-badge-j6" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
       </div>
       <div class="off-mode" id="off-j6-abdo">
         <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Reps/sec</div><div class="col-header">Fait</div></div>
@@ -536,10 +467,57 @@
     </div>
   </div>
 
-  <!-- OFF J7 -->
+  <div style="height:1px;background:var(--brown-mid);margin:4px 0 12px;border-radius:2px;opacity:0.4;"></div>
+
+  <!-- Vendredi J4 -->
+  <div class="day-card" id="card-j4">
+    <div class="day-header" onclick="toggleDay('j4')">
+      <div class="day-info"><div class="day-dot bas">🍑</div><div><div class="day-name">Vendredi — Bas B</div><div class="day-focus">Fesses + Ischio</div></div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hip Thrust</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ht-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ht-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ht-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">RDL</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-rdl-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-rdl-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-rdl-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Abduction assise</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j4-ab-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-ab-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-ab-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Step-up haut</div><span class="exercise-tag normal">3x10</span></div><div><span class="prev-kg" id="prev-j4-su-k"></span><input class="ex-input" placeholder="kg" data-ex="j4-su-k"></div><input class="ex-input" placeholder="reps" data-ex="j4-su-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Dead bug</div><span class="exercise-tag normal">3x10</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j4-db-r"></div>
+      <div id="extra-list-j4"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j4')">+ Ajouter un exercice</button>
+      <div class="cardio-row"><div><div class="cardio-label">🏃 Tapis incliné · 15 min</div><div class="cardio-sub">Marche rapide</div></div><div class="cardio-check" id="cardio-j4" onclick="toggleCardio('j4')"></div></div>
+      <div class="steps-row visible" id="steps-j4" style="display:flex;"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j4-pas" oninput="updateStepsBar('j4',this.value)"><span class="steps-badge" id="steps-badge-j4" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
+      <textarea class="note-area" placeholder="Notes..." data-note="j4"></textarea>
+    </div>
+  </div>
+
+  <!-- Samedi J5 -->
+  <div class="day-card" id="card-j5">
+    <div class="day-header" onclick="toggleDay('j5')">
+      <div class="day-info"><div class="day-dot haut">🏋️</div><div><div class="day-name">Samedi — Épaules + Abdos</div><div class="day-focus">Silhouette haut + taille fine</div></div></div>
+      <div class="day-chevron">▼</div>
+    </div>
+    <div class="day-body">
+      <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Kg</div><div class="col-header">Reps</div></div>
+      <div class="exercise-row"><div><div class="exercise-name">Face pull</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j5-fp-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-fp-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-fp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Rowing Pendlay</div><span class="exercise-tag failure">2x Failure</span></div><div><span class="prev-kg" id="prev-j5-rp-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-rp-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-rp-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Crunch bicycle</div><span class="exercise-tag failure">2x Failure</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="reps" data-ex="j5-bc-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Élévations latérales</div><span class="exercise-tag normal">3x15</span></div><div><span class="prev-kg" id="prev-j5-el-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-el-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-el-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Hyperextension</div><span class="exercise-tag normal">3x12</span></div><div><span class="prev-kg" id="prev-j5-hy-k"></span><input class="ex-input" placeholder="kg" data-ex="j5-hy-k"></div><input class="ex-input" placeholder="reps" data-ex="j5-hy-r"></div>
+      <div class="exercise-row"><div><div class="exercise-name">Planche</div><span class="exercise-tag normal">3x40s</span></div><input class="ex-input" disabled placeholder="—"><input class="ex-input" placeholder="sec" data-ex="j5-pl-r"></div>
+      <div id="extra-list-j5"></div>
+      <button class="add-exercise-btn" onclick="addExercise('j5')">+ Ajouter un exercice</button>
+      <div class="cardio-row"><div><div class="cardio-label">🌀 Elliptique · 15 min</div><div class="cardio-sub">Rythme modéré</div></div><div class="cardio-check" id="cardio-j5" onclick="toggleCardio('j5')"></div></div>
+      <div class="steps-row visible" id="steps-j5" style="display:flex;"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="j5-pas" oninput="updateStepsBar('j5',this.value)"><span class="steps-badge" id="steps-badge-j5" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
+      <textarea class="note-area" placeholder="Notes..." data-note="j5"></textarea>
+    </div>
+  </div>
+
+  <div style="height:1px;background:var(--brown-mid);margin:4px 0 12px;border-radius:2px;opacity:0.4;"></div>
+
+  <!-- Dimanche OFF -->
   <div class="day-card off-card" id="card-off-j7">
     <div class="day-header" onclick="toggleDay('off-j7')">
-      <div class="day-info"><div class="day-dot off">🔄</div><div><div class="day-name">Jour 7 — Off</div><div class="day-focus" id="off-focus-j7">Cardio ou Abdos</div></div></div>
+      <div class="day-info"><div class="day-dot off">🔄</div><div><div class="day-name">Dimanche — Off</div><div class="day-focus" id="off-focus-j7">Cardio ou Abdos</div></div></div>
       <div class="day-chevron">▼</div>
     </div>
     <div class="day-body">
@@ -559,11 +537,7 @@
           <input class="ex-input" placeholder="km" data-ex="off-j7-dist">
           <select class="ex-select" data-ex="off-j7-effort" style="grid-column:span 2;"><option value="">— Choisir —</option><option>😌 Facile</option><option>🙂 Modéré</option><option>😤 Difficile</option><option>🔥 Maximum</option></select>
         </div>
-        <div class="steps-row" id="steps-j7">
-          <span class="steps-label">👣 Nombre de pas</span>
-          <input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j7-pas" oninput="updateStepsBar('j7',this.value)">
-          <span class="steps-badge" id="steps-badge-j7" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span>
-        </div>
+        <div class="steps-row" id="steps-j7"><span class="steps-label">👣 Nombre de pas</span><input class="steps-input" type="number" placeholder="objectif 10 000" data-ex="off-j7-pas" oninput="updateStepsBar('j7',this.value)"><span class="steps-badge" id="steps-badge-j7" style="font-size:0.7rem;color:var(--light);white-space:nowrap;"></span></div>
       </div>
       <div class="off-mode" id="off-j7-abdo">
         <div class="col-headers"><div class="col-header">Exercice</div><div class="col-header">Reps/sec</div><div class="col-header">Fait</div></div>
@@ -579,6 +553,7 @@
   </div>
 
   <button class="save-btn" onclick="saveData()">✓ Sauvegarder la semaine</button>
+</div>
 </div>
 
 <!-- ===== GRAPHIQUES ===== -->
