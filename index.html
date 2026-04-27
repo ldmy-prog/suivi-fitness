@@ -71,8 +71,13 @@
   .prog-bar-bg { background:var(--surface); border-radius:20px; height:8px; overflow:hidden; margin-top:4px; }
   .prog-bar-fill { height:100%; background:linear-gradient(90deg,var(--brown-mid),var(--brown-dark)); border-radius:20px; transition:width 0.5s ease; }
   .prog-bar-label { font-size:0.68rem; color:var(--light); margin-top:5px; text-align:right; }
-  .day-card { background:var(--white); border-radius:18px; margin-bottom:12px; border:1.5px solid var(--surface); overflow:hidden; transition:border-color 0.2s; }
+  .day-card { background:var(--white); border-radius:18px; margin-bottom:12px; border:1.5px solid var(--surface); overflow:hidden; transition:all 0.3s; }
   .day-card.open { border-color:var(--brown-mid); }
+  .day-card.done { border-color:var(--brown) !important; background:var(--brown-light); }
+  .day-card.done .day-name { color:var(--brown-dark); }
+  .day-card.done .day-dot { opacity:1; }
+  .day-card.done .day-chevron { background:var(--brown-mid); color:var(--brown-dark); }
+  .day-card.done.open .day-chevron { background:var(--brown); color:white; transform:rotate(180deg); }
   .day-card.off-card.open { border-color:var(--brown); }
   .day-header { display:flex; align-items:center; justify-content:space-between; padding:15px 16px; cursor:pointer; user-select:none; }
   .day-info { display:flex; align-items:center; gap:12px; }
@@ -955,10 +960,38 @@
   }
 
   function toggleDay(d){document.getElementById('card-'+d).classList.toggle('open');}
+
+  function togglePresence(d){
+    document.getElementById('pd-'+d).classList.toggle('done');
+    // Colorer la card salle correspondante
+    const card=document.getElementById('card-'+d);
+    if(card) card.classList.toggle('done', document.getElementById('pd-'+d).classList.contains('done'));
+    autoSave();
+  }
+
+  function updateOffCardDone(day){
+    const card=document.getElementById('card-off-'+day);
+    if(!card) return;
+    const cardioCheck=document.getElementById('off-check-'+day);
+    const cardioOk=cardioCheck&&cardioCheck.classList.contains('done');
+    const abdoKeys=['bc','pl','cr','db','sp','va'];
+    const abdoOk=abdoKeys.some(k=>{
+      const el=document.getElementById('off-check-'+day+'-'+k);
+      return el&&el.classList.contains('done');
+    });
+    card.classList.toggle('done', cardioOk||abdoOk);
+  }
+
   function toggleCardio(d){const el=document.getElementById('cardio-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';autoSave();}
-  function togglePresence(d){document.getElementById('pd-'+d).classList.toggle('done');autoSave();}
-  function toggleOffCheck(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';autoSave();}
-  function toggleOffExo(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';autoSave();}
+  function toggleOffCheck(d){const el=document.getElementById('off-check-'+d);el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';updateOffCardDone(d);autoSave();}
+  function toggleOffExo(d){
+    const el=document.getElementById('off-check-'+d);
+    el.classList.toggle('done');el.textContent=el.classList.contains('done')?'✓':'';
+    // d est de la forme 'j3-bc', extraire uniquement le jour 'j3'
+    const day=d.split('-')[0];
+    updateOffCardDone(day);
+    autoSave();
+  }
   function toggleSteps(day, val){
     const isMarche=val.includes('Marche');
     const row=document.getElementById('steps-'+day);
@@ -1030,6 +1063,19 @@
     [1,2,3,4,5,6,7].forEach(d=>{document.getElementById('water-d'+d).value=data['water-d'+d]||'';});
     updateWaterBar();
     ['j1','j2','j4','j5'].forEach(j=>loadExtraState(j,data));
+    // Restaurer état done des cartes salle (basé sur présence)
+    ['j1','j2','j4','j5'].forEach(j=>{
+      const card=document.getElementById('card-'+j);
+      if(card) card.classList.toggle('done',!!data['presence-'+j]);
+    });
+    // Restaurer état done des cartes off (cardio coché ou 1 abdo coché)
+    ['j3','j6','j7'].forEach(j=>{
+      const cardioOk=!!data['off-done-'+j];
+      const abdoKeys=['bc','pl','cr','db','sp','va'];
+      const abdoOk=abdoKeys.some(k=>!!data['off-done-'+j+'-'+k]);
+      const card=document.getElementById('card-off-'+j);
+      if(card) card.classList.toggle('done', cardioOk||abdoOk);
+    });
     ['taille','hanches','cuisses','ventre','bras','fesses'].forEach(m=>{
       const el=document.getElementById('m-'+m);
       if(el) el.value=data['m-'+m]||'';
